@@ -50,7 +50,7 @@ if not PY33:
 
 
 setup(
-    name='pgp',
+    name='py-pgp',
     version=version,
     description='A Python implementation of OpenPGP',
     long_description=long_description,
