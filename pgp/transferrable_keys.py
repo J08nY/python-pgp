@@ -27,6 +27,7 @@ from zope.interface import provider
 
 from pgp import interfaces
 from pgp import exceptions
+from pgp.exceptions import UnsupportedPublicKeyAlgorithm
 from pgp.packets import constants as C
 from pgp.packets import packets
 from pgp.packets import signature_subpackets
@@ -380,7 +381,7 @@ class BasePublicKey(SignedMixin):
                                        long(self.exponent_e)
                                        ))
         else:
-            raise exceptions.UnsupportedPublicKeyAlgorithm(algorithm_type)
+            raise exceptions.UnsupportedPublicKeyAlgorithm(self.public_key_algorithm)
 
         return key_obj
 
@@ -502,7 +503,7 @@ class BaseSecretKey(BasePublicKey):
                                        long(self.multiplicative_inverse_u)
                                        ))
         else:
-            raise UnsupportedPublicKeyAlgorithm(algorithm_type)
+            raise UnsupportedPublicKeyAlgorithm(self.public_key_algorithm)
 
         return key_obj
 

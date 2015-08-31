@@ -35,6 +35,7 @@ requires = [
     'six',
     'requests',
     'zope.interface',
+    'pgpdump3'
     ]
 tests_require = [
     'coverage',

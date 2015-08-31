@@ -18,6 +18,8 @@ from base64 import b64encode
 import sys
 
 import magic
+import pgpdump
+import pgpdump.packet
 
 from pgp.exceptions import CannotParseCritical
 from pgp.exceptions import CannotParseCriticalNotation
