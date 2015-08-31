@@ -279,7 +279,7 @@ def get_symmetric_cipher(type_, key, mode, iv=None, segment_size=None,
         # We need to wrap the PyCrypto implementation so we can re-sync
         # for OpenPGP's weird CFB mode.
         try:
-            return syncable_cipher_wrapper.new(cipher, bytes(key.to_packet()), mode,
+            return syncable_cipher_wrapper.new(cipher, bytes(key), mode,
                                                IV=bytes(iv),
                                                segment_size=segment_size)
         except TypeError:
@@ -288,7 +288,7 @@ def get_symmetric_cipher(type_, key, mode, iv=None, segment_size=None,
                                                segment_size=segment_size)
 
     try:
-        return cipher.new(bytes(key.to_packet()), mode, IV=bytes(iv),
+        return cipher.new(bytes(key), mode, IV=bytes(iv),
                           segment_size=segment_size)
     except TypeError:
         return cipher.new(bytes(key.to_packet()), mode, iv=bytes(iv),
