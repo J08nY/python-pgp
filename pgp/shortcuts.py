@@ -9,8 +9,12 @@ from pgp.packets import parse_ascii_packet_data
 from pgp.transferrable_keys import TransferablePublicKey
 from pgp.transferrable_keys import TransferableSecretKey
 
-
-VERSION = pkg_resources.get_distribution('pgp').version
+try:
+    VERSION = pkg_resources.get_distribution('pgp').version
+except pkg_resources.DistributionNotFound:
+    # We're in a dev environemtn - ignore
+    VERSION = "dev"
+    pass
 
 
 def read_message(data, armored=False):

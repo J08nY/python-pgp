@@ -36,6 +36,7 @@ requires = [
     'six',
     'requests',
     'zope.interface',
+    'pgpdump3'
     ]
 tests_require = [
     'coverage',
@@ -50,7 +51,7 @@ if not PY33:
 
 
 setup(
-    name='pgp',
+    name='py-pgp',
     version=version,
     description='A Python implementation of OpenPGP',
     long_description=long_description,

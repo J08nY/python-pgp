@@ -2,11 +2,11 @@
 python-pgp
 ==========
 
-.. image:: https://travis-ci.org/mitchellrj/python-pgp.svg?branch=master
-   :target: https://travis-ci.org/mitchellrj/python-pgp
+.. image:: https://travis-ci.org/SkierPGP/python-pgp.svg?branch=master
+   :target: https://travis-ci.org/SkierPGP/python-pgp
 
-.. image:: https://coveralls.io/repos/mitchellrj/python-pgp/badge.png
-   :target: https://coveralls.io/r/mitchellrj/python-pgp
+.. image:: https://coveralls.io/repos/SkierPGP/python-pgp/badge.png
+   :target: https://coveralls.io/r/SkierPGP/python-pgp
 
 Summary
 -------
@@ -15,6 +15,8 @@ python-pgp aims to reproduce the full functionality of GnuPG in Python.
 It may also be used for creating raw OpenPGP packets and packet streams
 for test purposes. This may be a bit of a heavyweight solution for some
 purposes.
+
+This is a fork of the original library - the original one does not seem to be active and/or have a PyPI package.
 
 Alternatives
 ============

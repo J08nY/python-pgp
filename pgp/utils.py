@@ -285,7 +285,7 @@ def get_symmetric_cipher(type_, key, mode, iv=None, segment_size=None,
                                                IV=bytes(iv),
                                                segment_size=segment_size)
         except TypeError:
-            return syncable_cipher_wrapper.new(cipher, bytes(key), mode,
+            return syncable_cipher_wrapper.new(cipher, bytes(key.to_packet()), mode,
                                                iv=bytes(iv),
                                                segment_size=segment_size)
 
@@ -293,7 +293,7 @@ def get_symmetric_cipher(type_, key, mode, iv=None, segment_size=None,
         return cipher.new(bytes(key), mode, IV=bytes(iv),
                           segment_size=segment_size)
     except TypeError:
-        return cipher.new(bytes(key), mode, iv=bytes(iv),
+        return cipher.new(bytes(key.to_packet()), mode, iv=bytes(iv),
                           segment_size=segment_size)
 
 

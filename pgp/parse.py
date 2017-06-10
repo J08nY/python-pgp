@@ -20,6 +20,7 @@ import traceback
 
 import magic
 import pgpdump
+import pgpdump.packet
 
 from pgp.exceptions import CannotParseCritical
 from pgp.exceptions import CannotParseCriticalNotation
