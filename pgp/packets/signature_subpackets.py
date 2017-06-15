@@ -16,9 +16,8 @@
 
 import warnings
 
-from pgp import crc24
-from pgp import utils
-from pgp.packets import constants
+import constants
+from pgp import crc24, utils
 
 
 class SignatureSubpacket(object):
@@ -224,8 +223,8 @@ class PreferredSymmetricAlgorithmsSubpacket(SignatureSubpacket):
         for alg in preferred_algorithms:
             assert alg < 256
         SignatureSubpacket.__init__(self,
-                constants.PREFERRED_SYMMETRIC_ALGORITHMS_SUBPACKET_TYPE,
-                critical)
+                                    constants.PREFERRED_SYMMETRIC_ALGORITHMS_SUBPACKET_TYPE,
+                                    critical)
         self.preferred_algorithms = preferred_algorithms
 
     @property
@@ -350,7 +349,7 @@ class PreferredHashAlgorithmsSubpacket(PreferredSymmetricAlgorithmsSubpacket):
         for alg in preferred_algorithms:
             assert alg < 256
         SignatureSubpacket.__init__(self,
-                constants.PREFERRED_HASH_ALGORITHMS_SUBPACKET_TYPE, critical)
+                                    constants.PREFERRED_HASH_ALGORITHMS_SUBPACKET_TYPE, critical)
         self.preferred_algorithms = preferred_algorithms
 
 
@@ -362,8 +361,8 @@ class PreferredCompressionAlgorithmsSubpacket(
         for alg in preferred_algorithms:
             assert alg < 256
         SignatureSubpacket.__init__(self,
-                constants.PREFERRED_COMPRESSION_ALGORITHMS_SUBPACKET_TYPE,
-                critical)
+                                    constants.PREFERRED_COMPRESSION_ALGORITHMS_SUBPACKET_TYPE,
+                                    critical)
         self.preferred_algorithms = preferred_algorithms
 
 
@@ -377,7 +376,7 @@ class KeyServerPreferencesSubpacket(SignatureSubpacket):
 
     def __init__(self, critical, no_modify):
         SignatureSubpacket.__init__(self,
-                constants.KEY_SERVER_PREFERENCES_SUBPACKET_TYPE, critical)
+                                    constants.KEY_SERVER_PREFERENCES_SUBPACKET_TYPE, critical)
         self.no_modify = no_modify
 
     @property

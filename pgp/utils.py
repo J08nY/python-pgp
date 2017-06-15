@@ -18,36 +18,18 @@ import bz2
 import math
 import zlib
 
-from Crypto.Cipher import blockalgo
-from Crypto.Cipher import AES
-from Crypto.Cipher import Blowfish
-from Crypto.Cipher import DES3
-from Crypto.Cipher import CAST
-from Crypto.Hash import MD5
-from Crypto.Hash import RIPEMD
-from Crypto.Hash import SHA
-from Crypto.Hash import SHA224
-from Crypto.Hash import SHA256
-from Crypto.Hash import SHA384
-from Crypto.Hash import SHA512
-from Crypto.PublicKey import DSA
-from Crypto.PublicKey import ElGamal
-from Crypto.PublicKey import RSA
+from Crypto.Cipher import blockalgo, AES, Blowfish, DES3, CAST
+from Crypto.Hash import MD5, RIPEMD, SHA, SHA224, SHA256, SHA384, SHA512
+from Crypto.PublicKey import DSA, ElGamal, RSA
 from Crypto.Random import random
 from Crypto.Signature import PKCS1_v1_5
-from Crypto.Util.number import bytes_to_long
-from Crypto.Util.number import GCD
-from Crypto.Util.number import long_to_bytes
+from Crypto.Util.number import bytes_to_long, GCD, long_to_bytes
 
-from pgp.cipher import aidea
-from pgp.cipher import camellia
-from pgp.cipher import twofish
-from pgp.cipher import wrapper as syncable_cipher_wrapper
-from pgp.exceptions import PublicKeyAlgorithmCannotSign
-from pgp.exceptions import UnsupportedDigestAlgorithm
-from pgp.exceptions import UnsupportedPublicKeyAlgorithm
-from pgp.packets import constants
-
+import constants
+from pgp.cipher import aidea, camellia, twofish, \
+    wrapper as syncable_cipher_wrapper
+from pgp.exceptions import PublicKeyAlgorithmCannotSign, \
+    UnsupportedDigestAlgorithm, UnsupportedPublicKeyAlgorithm
 
 hash_lengths = {
     1: 16,  # MD5
@@ -93,25 +75,24 @@ symmetric_cipher_key_lengths = {
 
 
 def sign_hash(pub_algorithm_type, secret_key, hash_, k=None):
-    if pub_algorithm_type in (1, 3):
+    if pub_algorithm_type in (
+            constants.PUBKEY_ALGO_RSA, constants.PUBKEY_ALGO_RSA_S):
         # RSA
         sig_string = PKCS1_v1_5.new(secret_key).sign(hash_)
         return (bytes_to_long(sig_string),)
-    elif pub_algorithm_type == 20:
+    elif pub_algorithm_type == constants.PUBKEY_ALGO_ELGAMAL:
         # ELG
-        # TODO: Should only be allowed for test purposes
         if k is None:
             while 1:
                 # This can be pretty darn slow
                 k = random.StrongRandom().randint(1, secret_key.p - 1)
                 if GCD(k, secret_key.p - 1) == 1:
                     break
-            print(k)
         # TODO: Remove dependence on undocumented method
         sig_string = PKCS1_v1_5.EMSA_PKCS1_V1_5_ENCODE(
                             hash_, secret_key.size())
         return secret_key.sign(sig_string, k)
-    elif pub_algorithm_type == 17:
+    elif pub_algorithm_type == constants.PUBKEY_ALGO_DSA:
         q = secret_key.q
         qbits = int(math.floor(float(math.log(q, 2)))) + 1
         qbytes = int(math.ceil(qbits / 8.0))
@@ -126,17 +107,18 @@ def sign_hash(pub_algorithm_type, secret_key, hash_, k=None):
 
 
 def verify_hash(pub_algorithm_type, public_key, hash_, values):
-    if pub_algorithm_type in (1, 3):
+    if pub_algorithm_type in (
+            constants.PUBKEY_ALGO_RSA, constants.PUBKEY_ALGO_RSA_S):
         # RSA
         s = long_to_bytes(values[0])
         return PKCS1_v1_5.new(public_key).verify(hash_, s)
-    elif pub_algorithm_type == 20:
+    elif pub_algorithm_type == constants.PUBKEY_ALGO_ELGAMAL:
         # ELG
         # TODO: Remove dependence on undocumented method
         sig_string = PKCS1_v1_5.EMSA_PKCS1_V1_5_ENCODE(
                             hash_, public_key.size())
         return public_key.verify(sig_string, values)
-    elif pub_algorithm_type == 17:
+    elif pub_algorithm_type == constants.PUBKEY_ALGO_DSA:
         # DSA
         q = public_key.q
         qbits = int(math.floor(float(math.log(q, 2)))) + 1

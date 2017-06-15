@@ -21,15 +21,11 @@ import weakref
 
 from zope.interface import implementer
 
-from pgp import interfaces
-from pgp import exceptions
-from pgp import utils
+import constants as C
+from pgp import interfaces, exceptions, utils
 from pgp.crc24 import crc24
-from pgp.packets import constants as C
-from pgp.packets import packets
-from pgp.packets import signature_subpackets
+from pgp.packets import packets, signature_subpackets
 from pgp.user_id import parse_user_id
-
 
 _marker = object()
 

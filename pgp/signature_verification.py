@@ -25,25 +25,16 @@ OpenPGP signatures found in public key data.
 
 import datetime
 
+import constants
 from pgp import utils
 from pgp.compat import raise_with
-from pgp.exceptions import CannotValidateSignature
-from pgp.exceptions import InvalidBackSignature
-from pgp.exceptions import InvalidSignature
-from pgp.exceptions import InvalidSubkeyBindingSignature
-from pgp.exceptions import MissingBackSignature
-from pgp.exceptions import SignatureCreatedInTheFuture
-from pgp.exceptions import SignatureCreatedBeforeContent
-from pgp.exceptions import SignatureDigestMismatch
-from pgp.exceptions import SignatureVerificationFailed
-from pgp.exceptions import SignedByRevokedKey
-from pgp.exceptions import SigningKeyCreatedInTheFuture
-from pgp.exceptions import SigningKeyHasBeenRevoked
-from pgp.exceptions import SigningKeyHasExpired
-from pgp.exceptions import UnexpectedSignatureType
-from pgp.packets import constants
-from pgp.transferrable_keys import TransferablePublicKey
-from pgp.transferrable_keys import TransferableSecretKey
+from pgp.exceptions import CannotValidateSignature, InvalidBackSignature, \
+    InvalidSignature, InvalidSubkeyBindingSignature, MissingBackSignature, \
+    SignatureCreatedInTheFuture, SignatureCreatedBeforeContent, \
+    SignatureDigestMismatch, SignatureVerificationFailed, SignedByRevokedKey, \
+    SigningKeyCreatedInTheFuture, SigningKeyHasBeenRevoked, \
+    SigningKeyHasExpired, UnexpectedSignatureType
+from pgp.transferrable_keys import TransferablePublicKey, TransferableSecretKey
 
 try:
     long

@@ -33,7 +33,7 @@ import time
 
 from pgp.packets import parse_binary_packet_data
 from pgp.packets import parse_binary_packet_stream
-from pgp.packets import constants
+import constants
 from pgp.transferrable_keys import TransferablePublicKey
 from pgp.transferrable_keys import TransferableSecretKey
 

@@ -20,22 +20,17 @@ import math
 import time
 import weakref
 
-from Crypto.Hash import SHA
 import magic
-from zope.interface import implementer
-from zope.interface import provider
+from Crypto.Hash import SHA
+from zope.interface import implementer, provider
 
-from pgp import interfaces
-from pgp import exceptions
+import constants as C
+from pgp import interfaces, exceptions, utils
 from pgp.exceptions import UnsupportedPublicKeyAlgorithm
-from pgp.packets import constants as C
-from pgp.packets import packets
-from pgp.packets import signature_subpackets
-from pgp.packets import user_attribute_subpackets
+from pgp.packets import packets, signature_subpackets, \
+    user_attribute_subpackets
 from pgp.signature import BaseSignature
 from pgp.user_id import parse_user_id
-from pgp import utils
-
 
 try:
     long

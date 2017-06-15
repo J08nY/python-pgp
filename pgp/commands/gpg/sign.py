@@ -1,5 +1,5 @@
+from constants import SIGNATURE_OF_A_BINARY_DOCUMENT
 from pgp.commands.gpg.sign_ import SignCommand
-from pgp.packets.constants import SIGNATURE_OF_A_BINARY_DOCUMENT
 
 
 class Command(SignCommand):

@@ -23,14 +23,12 @@ from Crypto import Random
 from Crypto.Cipher.PKCS1_v1_5 import PKCS115_Cipher
 from Crypto.Hash import SHA
 
-from pgp.packets import constants
-from pgp.packets.signature_subpackets import signature_subpacket_from_data
-from pgp.packets.signature_subpackets import EmbeddedSignatureSubpacket
+import constants
+from pgp import s2k, utils
+from pgp.packets.signature_subpackets import signature_subpacket_from_data, \
+    EmbeddedSignatureSubpacket
 from pgp.packets.user_attribute_subpackets import \
     user_attribute_subpacket_from_data
-from pgp import s2k
-from pgp import utils
-
 
 SYM_ENC_ID_PROTECTED_DATA_PACKET_TYPE = \
     constants.SYMMETRICALLY_ENCRYPTED_AND_INTEGRITY_PROTECTED_DATA_PACKET_TYPE
@@ -179,7 +177,7 @@ class PublicKeyEncryptedSessionKeyPacket(Packet):
     def __init__(self, header_format, version, key_id, public_key_algorithm,
                  encrypted_session_key):
         Packet.__init__(self, header_format,
-                    constants.PUBLIC_KEY_ENCRYPTED_SESSION_KEY_PACKET_TYPE)
+                        constants.PUBLIC_KEY_ENCRYPTED_SESSION_KEY_PACKET_TYPE)
         self.version = version
         self.key_id = key_id
         self.public_key_algorithm = public_key_algorithm
@@ -547,7 +545,7 @@ class SymmetricKeyEncryptedSessionKeyPacket(Packet):
     def __init__(self, header_format, version, symmetric_algorithm,
                  s2k_specification, encrypted_session_key=None):
         Packet.__init__(self, header_format,
-                    constants.SYMMETRIC_KEY_ENCRYPTED_SESSION_KEY_PACKET_TYPE)
+                        constants.SYMMETRIC_KEY_ENCRYPTED_SESSION_KEY_PACKET_TYPE)
         self.version = version
         self.symmetric_algorithm = symmetric_algorithm
         self.s2k_specification = s2k_specification

@@ -18,17 +18,15 @@ import abc
 import collections
 import datetime
 import re
-import six
 
+import six
 from Crypto import Random
 from Crypto.Hash import SHA
 
-from pgp import s2k
-from pgp.packets import constants as C
+import constants as C
+from pgp import s2k, utils
 from pgp.packets import packets
 from pgp.signature import BaseSignature
-from pgp import utils
-
 
 INCOMPLETE_CRLF = re.compile(b'(\r[^\n]|[^\r]\n)', re.M)
 

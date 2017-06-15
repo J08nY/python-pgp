@@ -1,13 +1,11 @@
 import pkg_resources
 
+import constants
 from pgp import armor
 from pgp.db.gpg import GPGDatabase
 from pgp.message import open_pgp_message_from_packets
-from pgp.packets import constants
-from pgp.packets import parse_binary_packet_data
-from pgp.packets import parse_ascii_packet_data
-from pgp.transferrable_keys import TransferablePublicKey
-from pgp.transferrable_keys import TransferableSecretKey
+from pgp.packets import parse_binary_packet_data, parse_ascii_packet_data
+from pgp.transferrable_keys import TransferablePublicKey, TransferableSecretKey
 
 try:
     VERSION = pkg_resources.get_distribution('pgp').version

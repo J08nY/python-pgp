@@ -1,5 +1,5 @@
+from constants import SIGNATURE_OF_A_CANONICAL_TEXT_DOCUMENT
 from pgp.commands.gpg.sign import Command as SignCommand
-from pgp.packets.constants import SIGNATURE_OF_A_CANONICAL_TEXT_DOCUMENT
 
 
 class Command(SignCommand):
